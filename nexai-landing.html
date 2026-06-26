@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="NexAI — The next-generation AI-driven data automation platform. Automate pipelines, orchestrate intelligence, and ship at the speed of thought." />
+    <meta name="keywords" content="AI automation, data pipeline, machine learning, intelligent automation, NexAI" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="NexAI Platform" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="NexAI — Intelligence. Automated." />
+    <meta property="og:description" content="The next-generation AI-driven data automation platform." />
+    <meta property="og:url" content="https://nexai.dev" />
+    <meta property="og:site_name" content="NexAI" />
+    <meta property="og:image" content="https://nexai.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NexAI — Intelligence. Automated." />
+    <meta name="twitter:description" content="The next-generation AI-driven data automation platform." />
+    <meta name="twitter:image" content="https://nexai.dev/og-image.png" />
+
+    <title>NexAI — Intelligence. Automated.</title>
+
+    <!-- Google Fonts: JetBrains Mono + Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ==============================
+           CSS VARIABLES — Brand System
+        ============================== */
+        :root {
+            --forsythia: #FFC801;
+            --deep-saffron: #FF9932;
+            --nocturnal: #114C5A;
+            --oceanic-noir: #172B36;
+            --arctic-powder: #F1F6F4;
+            --mystic-mint: #D9E8E2;
+
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-body: 'Inter', sans-serif;
+
+            --ease-micro: cubic-bezier(0.25, 0, 0, 1);
+            --ease-layout: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+            --t-micro: 175ms;
+            --t-layout: 350ms;
+            --t-spring: 500ms;
+        }
+
+        /* ==============================
+           RESET & BASE
+        ============================== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            cursor: none;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--oceanic-noir);
+            color: var(--arctic-powder);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: none;
+        }
+
+        /* ==============================
+           CUSTOM CURSOR
+        ============================== */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--forsythia);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.2s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 200, 1, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, transform 0.15s ease;
+        }
+
+        .cursor-ring.hover {
+            width: 56px;
+            height: 56px;
+            border-color: var(--forsythia);
+            transform: translate(-50%, -50%) scale(1.2);
+            background: rgba(255, 200, 1, 0.08);
+        }
+
+        .cursor-ring.click {
+            width: 32px;
+            height: 32px;
+            border-color: var(--deep-saffron);
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+
+        /* ==============================
+           ANIMATED BACKGROUND LAYERS
+           WITH BRIGHT STARS & LIGHTS
+        ============================== */
+
+        /* Layer 1: Deep space with stars */
+        .bg-layer-1 {
+            position: fixed;
+            inset: 0;
+            z-index: -6;
+            background: radial-gradient(ellipse at 20% 50%, #0a1a2a 0%, var(--oceanic-noir) 70%);
+        }
+
+        /* Layer 1.5: Starfield - BRIGHT VISIBLE STARS */
+        .starfield {
+            position: fixed;
+            inset: 0;
+            z-index: -5;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            animation: twinkle var(--duration) ease-in-out infinite;
+        }
+
+        .star:nth-child(1) { width: 3px; height: 3px; left: 5%; top: 10%; --duration: 2.5s; animation-delay: 0s; opacity: 0.9; }
+        .star:nth-child(2) { width: 2px; height: 2px; left: 12%; top: 25%; --duration: 3.2s; animation-delay: 0.5s; opacity: 0.7; }
+        .star:nth-child(3) { width: 4px; height: 4px; left: 20%; top: 5%; --duration: 2.8s; animation-delay: 1s; opacity: 0.9; }
+        .star:nth-child(4) { width: 2px; height: 2px; left: 28%; top: 40%; --duration: 3.5s; animation-delay: 0.3s; opacity: 0.6; }
+        .star:nth-child(5) { width: 3px; height: 3px; left: 35%; top: 15%; --duration: 2.2s; animation-delay: 1.5s; opacity: 0.8; }
+        .star:nth-child(6) { width: 5px; height: 5px; left: 42%; top: 50%; --duration: 4s; animation-delay: 0.8s; opacity: 0.9; }
+        .star:nth-child(7) { width: 2px; height: 2px; left: 50%; top: 8%; --duration: 2.6s; animation-delay: 2s; opacity: 0.7; }
+        .star:nth-child(8) { width: 3px; height: 3px; left: 58%; top: 35%; --duration: 3s; animation-delay: 0.2s; opacity: 0.8; }
+        .star:nth-child(9) { width: 4px; height: 4px; left: 65%; top: 12%; --duration: 2.4s; animation-delay: 1.2s; opacity: 0.9; }
+        .star:nth-child(10) { width: 2px; height: 2px; left: 72%; top: 45%; --duration: 3.8s; animation-delay: 0.6s; opacity: 0.6; }
+        .star:nth-child(11) { width: 3px; height: 3px; left: 80%; top: 20%; --duration: 2.9s; animation-delay: 1.8s; opacity: 0.8; }
+        .star:nth-child(12) { width: 5px; height: 5px; left: 88%; top: 5%; --duration: 3.3s; animation-delay: 0.4s; opacity: 0.9; }
+        .star:nth-child(13) { width: 2px; height: 2px; left: 92%; top: 55%; --duration: 2.7s; animation-delay: 1.1s; opacity: 0.7; }
+        .star:nth-child(14) { width: 3px; height: 3px; left: 15%; top: 70%; --duration: 3.6s; animation-delay: 0.9s; opacity: 0.8; }
+        .star:nth-child(15) { width: 4px; height: 4px; left: 45%; top: 80%; --duration: 2.3s; animation-delay: 1.6s; opacity: 0.9; }
+        .star:nth-child(16) { width: 2px; height: 2px; left: 75%; top: 75%; --duration: 3.1s; animation-delay: 0.1s; opacity: 0.7; }
+        .star:nth-child(17) { width: 3px; height: 3px; left: 55%; top: 65%; --duration: 2.1s; animation-delay: 2.2s; opacity: 0.8; }
+        .star:nth-child(18) { width: 4px; height: 4px; left: 30%; top: 90%; --duration: 3.4s; animation-delay: 0.7s; opacity: 0.9; }
+        .star:nth-child(19) { width: 2px; height: 2px; left: 68%; top: 88%; --duration: 2.5s; animation-delay: 1.3s; opacity: 0.6; }
+        .star:nth-child(20) { width: 3px; height: 3px; left: 8%; top: 92%; --duration: 3.7s; animation-delay: 0.5s; opacity: 0.8; }
+        .star:nth-child(21) { width: 5px; height: 5px; left: 95%; top: 40%; --duration: 2.6s; animation-delay: 1.9s; opacity: 0.9; }
+        .star:nth-child(22) { width: 2px; height: 2px; left: 48%; top: 30%; --duration: 3.9s; animation-delay: 0.3s; opacity: 0.7; }
+        .star:nth-child(23) { width: 3px; height: 3px; left: 82%; top: 60%; --duration: 2.4s; animation-delay: 2.1s; opacity: 0.8; }
+        .star:nth-child(24) { width: 4px; height: 4px; left: 22%; top: 55%; --duration: 3.2s; animation-delay: 0.8s; opacity: 0.9; }
+        .star:nth-child(25) { width: 2px; height: 2px; left: 38%; top: 75%; --duration: 2.8s; animation-delay: 1.4s; opacity: 0.7; }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: var(--opacity, 0.8); transform: scale(1); }
+            50% { opacity: 0.2; transform: scale(0.5); }
+        }
+
+        /* Layer 2: Animated gradient flow - BRIGHTER */
+        .bg-layer-2 {
+            position: fixed;
+            inset: 0;
+            z-index: -4;
+            background: linear-gradient(135deg,
+                    rgba(255, 200, 1, 0.04) 0%,
+                    rgba(17, 76, 90, 0.12) 25%,
+                    rgba(255, 153, 50, 0.04) 50%,
+                    rgba(17, 76, 90, 0.12) 75%,
+                    rgba(255, 200, 1, 0.04) 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 25s ease-in-out infinite;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Layer 3: Animated grid */
+        .bg-layer-3 {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background-image:
+                linear-gradient(rgba(255, 200, 1, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 200, 1, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 40%, transparent 100%);
+            animation: gridDrift 30s linear infinite;
+            transform: perspective(800px) rotateX(1deg);
+        }
+        @keyframes gridDrift {
+            from { background-position: 0 0; }
+            to { background-position: 60px 60px; }
+        }
+
+        /* Layer 4: Floating orbs - BRIGHTER AND BIGGER */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.7;
+        }
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 200, 1, 0.12), transparent 70%);
+            top: -200px;
+            left: -150px;
+            animation: orbFloat1 14s ease-in-out infinite;
+        }
+        .orb-2 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(255, 153, 50, 0.10), transparent 70%);
+            bottom: -150px;
+            right: -80px;
+            animation: orbFloat2 16s ease-in-out infinite reverse;
+        }
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(217, 232, 226, 0.08), transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbFloat3 20s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, 80px) scale(1.15); }
+            50% { transform: translate(50px, -40px) scale(0.85); }
+            75% { transform: translate(-60px, 60px) scale(1.1); }
+        }
+        @keyframes orbFloat2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-80px, -60px) scale(1.2); }
+            66% { transform: translate(70px, 40px) scale(0.8); }
+        }
+        @keyframes orbFloat3 {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.3); }
+        }
+
+        /* Layer 5: Light rays - BRIGHT MOVING LIGHTS */
+        .light-rays {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.15;
+        }
+
+        .ray {
+            position: absolute;
+            width: 2px;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent, var(--forsythia), transparent);
+            border-radius: 50%;
+            animation: rayMove var(--duration) ease-in-out infinite;
+            filter: blur(4px);
+        }
+
+        .ray:nth-child(1) { left: 10%; top: -100px; --duration: 8s; animation-delay: 0s; height: 300px; opacity: 0.6; }
+        .ray:nth-child(2) { left: 25%; top: -100px; --duration: 10s; animation-delay: 1s; height: 250px; opacity: 0.4; }
+        .ray:nth-child(3) { left: 40%; top: -100px; --duration: 9s; animation-delay: 2s; height: 350px; opacity: 0.7; }
+        .ray:nth-child(4) { left: 55%; top: -100px; --duration: 11s; animation-delay: 0.5s; height: 200px; opacity: 0.5; }
+        .ray:nth-child(5) { left: 70%; top: -100px; --duration: 7s; animation-delay: 1.5s; height: 280px; opacity: 0.6; }
+        .ray:nth-child(6) { left: 85%; top: -100px; --duration: 12s; animation-delay: 0.8s; height: 320px; opacity: 0.4; }
+        .ray:nth-child(7) { left: 15%; top: -100px; --duration: 9s; animation-delay: 2.5s; height: 220px; opacity: 0.5; }
+        .ray:nth-child(8) { left: 50%; top: -100px; --duration: 8s; animation-delay: 1.2s; height: 300px; opacity: 0.6; }
+
+        @keyframes rayMove {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(calc(100vh + 200px)) rotate(5deg) scale(0.8); opacity: 0; }
+        }
+
+        /* Layer 6: Particles - BRIGHTER */
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.8;
+        }
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--forsythia);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat linear infinite;
+            box-shadow: 0 0 6px rgba(255, 200, 1, 0.3);
+        }
+        .particle:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; width: 4px; height: 4px; }
+        .particle:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 1s; width: 3px; height: 3px; }
+        .particle:nth-child(3) { left: 30%; animation-duration: 14s; animation-delay: 2s; width: 5px; height: 5px; }
+        .particle:nth-child(4) { left: 40%; animation-duration: 18s; animation-delay: 0.5s; width: 3px; height: 3px; }
+        .particle:nth-child(5) { left: 50%; animation-duration: 13s; animation-delay: 1.5s; width: 4px; height: 4px; }
+        .particle:nth-child(6) { left: 60%; animation-duration: 16s; animation-delay: 3s; width: 3px; height: 3px; }
+        .particle:nth-child(7) { left: 70%; animation-duration: 17s; animation-delay: 0.8s; width: 5px; height: 5px; }
+        .particle:nth-child(8) { left: 80%; animation-duration: 11s; animation-delay: 2.2s; width: 3px; height: 3px; }
+        .particle:nth-child(9) { left: 90%; animation-duration: 19s; animation-delay: 1.2s; width: 4px; height: 4px; }
+        .particle:nth-child(10) { left: 15%; animation-duration: 14s; animation-delay: 3.5s; width: 3px; height: 3px; }
+        .particle:nth-child(11) { left: 45%; animation-duration: 16s; animation-delay: 0.3s; width: 4px; height: 4px; }
+        .particle:nth-child(12) { left: 75%; animation-duration: 13s; animation-delay: 2.8s; width: 3px; height: 3px; }
+        .particle:nth-child(13) { left: 55%; animation-duration: 18s; animation-delay: 1.8s; width: 5px; height: 5px; }
+        .particle:nth-child(14) { left: 25%; animation-duration: 15s; animation-delay: 0.9s; width: 3px; height: 3px; }
+        .particle:nth-child(15) { left: 65%; animation-duration: 17s; animation-delay: 2.5s; width: 4px; height: 4px; }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* ==============================
+           LOADER
+        ============================== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--oceanic-noir);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            transition: opacity 200ms var(--ease-micro), visibility 200ms;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-wordmark {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--forsythia);
+            letter-spacing: -0.04em;
+            animation: loaderPulse 1.2s ease-in-out infinite;
+        }
+        @keyframes loaderPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.98); }
+        }
+
+        .loader-bar-track {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .loader-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--forsythia), var(--deep-saffron));
+            border-radius: 2px;
+            width: 0%;
+            animation: loaderFill 420ms var(--ease-layout) forwards;
+        }
+        @keyframes loaderFill {
+            to { width: 100%; }
+        }
+
+        /* ==============================
+           PAGE ENTRY ANIMATION
+        ============================== */
+        .page-wrap {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 300ms var(--ease-layout), transform 300ms var(--ease-layout);
+        }
+        .page-wrap.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==============================
+           NAVIGATION
+        ============================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 0 max(24px, calc((100vw - 1200px) / 2));
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(23, 43, 54, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 200, 1, 0.08);
+            transition: background var(--t-micro) var(--ease-micro);
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--forsythia);
+            letter-spacing: -0.04em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        nav a {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: rgba(241, 246, 244, 0.7);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: color var(--t-micro) var(--ease-micro), background var(--t-micro) var(--ease-micro);
+        }
+        nav a:hover {
+            color: var(--arctic-powder);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-cta {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--oceanic-noir) !important;
+            background: var(--forsythia) !important;
+            padding: 10px 22px !important;
+            border-radius: 8px;
+            transition: background var(--t-micro) var(--ease-micro), transform var(--t-micro) var(--ease-micro) !important;
+        }
+        .nav-cta:hover {
+            background: var(--deep-saffron) !important;
+            transform: translateY(-1px);
+        }
+
+        /* ==============================
+           HERO
+        ============================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px max(24px, calc((100vw - 900px) / 2)) 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--forsythia);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: rgba(255, 200, 1, 0.08);
+            border: 1px solid rgba(255, 200, 1, 0.15);
+            border-radius: 100px;
+            padding: 8px 20px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 0.8s var(--ease-spring) forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--forsythia);
+            animation: blink 1.5s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .hero-headline {
+            font-family: var(--font-mono);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.0;
+            letter-spacing: -0.04em;
+            color: var(--arctic-powder);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s var(--ease-spring) 0.15s forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-headline .gradient-text {
+            background: linear-gradient(135deg, var(--forsythia), var(--deep-saffron));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subhead {
+            font-family: var(--font-body);
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            font-weight: 400;
+            color: rgba(241, 246, 244, 0.7);
+            max-width: 600px;
+            margin: 20px auto 44px;
+            line-height: 1.65;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s var(--ease-spring) 0.3s forwards;
+            opacity: 0;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s var(--ease-spring) 0.45s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--oceanic-noir);
+            background: linear-gradient(135deg, var(--forsythia), var(--deep-saffron));
+            padding: 16px 36px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform var(--t-micro) var(--ease-micro), box-shadow var(--t-micro) var(--ease-micro);
+            position: relative;
+            z-index: 2;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 32px rgba(255, 200, 1, 0.35);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--arctic-powder);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 16px 36px;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background var(--t-micro) var(--ease-micro), border-color var(--t-micro) var(--ease-micro);
+            position: relative;
+            z-index: 2;
+        }
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 200, 1, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .hero-metrics {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            margin-top: 72px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s var(--ease-spring) 0.6s forwards;
+            opacity: 0;
+        }
+        .metric {
+            text-align: center;
+            position: relative;
+        }
+        .metric::after {
+            content: '';
+            position: absolute;
+            right: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .metric:last-child::after { display: none; }
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--forsythia);
+            line-height: 1;
+            display: block;
+        }
+        .metric-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(241, 246, 244, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 6px;
+            display: block;
+        }
+
+        /* ==============================
+           SECTION UTILITIES
+        ============================== */
+        section {
+            padding: 96px max(24px, calc((100vw - 1200px) / 2));
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--forsythia);
+            margin-bottom: 12px;
+        }
+
+        .section-heading {
+            font-family: var(--font-mono);
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--arctic-powder);
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            font-size: 1.1rem;
+            color: rgba(241, 246, 244, 0.6);
+            line-height: 1.7;
+            max-width: 560px;
+        }
+
+        .section-header { margin-bottom: 56px; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 600ms var(--ease-layout), transform 600ms var(--ease-layout);
+        }
+        .reveal.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 80ms; }
+        .reveal-delay-2 { transition-delay: 160ms; }
+        .reveal-delay-3 { transition-delay: 240ms; }
+        .reveal-delay-4 { transition-delay: 320ms; }
+
+        /* ==============================
+           FEATURE 2: BENTO → ACCORDION
+        ============================== */
+        #features {
+            background: rgba(23, 43, 54, 0.7);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto auto;
+            gap: 16px;
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 32px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: border-color var(--t-micro) var(--ease-micro),
+                background var(--t-micro) var(--ease-micro),
+                transform var(--t-micro) var(--ease-micro),
+                box-shadow var(--t-micro) var(--ease-micro);
+        }
+
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 200, 1, 0.04), transparent 60%);
+            opacity: 0;
+            transition: opacity var(--t-micro) var(--ease-micro);
+            border-radius: 16px;
+        }
+
+        .bento-card:hover {
+            border-color: rgba(255, 200, 1, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+        .bento-card:hover::before { opacity: 1; }
+
+        .bento-card.active {
+            border-color: rgba(255, 200, 1, 0.5);
+            background: rgba(255, 200, 1, 0.06);
+            box-shadow: 0 0 0 1px rgba(255, 200, 1, 0.2), 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+        .bento-card.active::before { opacity: 1; }
+
+        .bento-card:nth-child(1) { grid-column: span 2; }
+        .bento-card:nth-child(4) { grid-column: span 2; }
+
+        .bento-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 200, 1, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: background var(--t-micro) var(--ease-micro);
+        }
+        .bento-card:hover .bento-icon,
+        .bento-card.active .bento-icon {
+            background: rgba(255, 200, 1, 0.2);
+        }
+        .bento-icon svg { width: 24px; height: 24px; }
+
+        .bento-title {
+            font-family: var(--font-mono);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--arctic-powder);
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .bento-desc {
+            font-size: 0.95rem;
+            color: rgba(241, 246, 244, 0.65);
+            line-height: 1.65;
+        }
+
+        .bento-detail {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: rgba(241, 246, 244, 0.5);
+            line-height: 1.6;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 350ms var(--ease-layout), opacity 350ms var(--ease-layout);
+            opacity: 0;
+        }
+        .bento-card.active .bento-detail {
+            max-height: 120px;
+            opacity: 1;
+        }
+
+        .bento-tag {
+            display: inline-block;
+            margin-top: 16px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--forsythia);
+            background: rgba(255, 200, 1, 0.08);
+            border: 1px solid rgba(255, 200, 1, 0.15);
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        .accordion {
+            display: none;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            overflow: hidden;
+        }
+
+        .accordion-trigger {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-family: var(--font-body);
+        }
+
+        .accordion-icon-wrap {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 200, 1, 0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background var(--t-micro) var(--ease-micro);
+        }
+        .accordion-item.open .accordion-icon-wrap { background: rgba(255, 200, 1, 0.16); }
+        .accordion-icon-wrap svg { width: 20px; height: 20px; }
+
+        .accordion-title {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--arctic-powder);
+            flex: 1;
+        }
+
+        .accordion-chevron {
+            width: 20px;
+            height: 20px;
+            color: rgba(241, 246, 244, 0.4);
+            transition: transform var(--t-micro) var(--ease-micro), color var(--t-micro) var(--ease-micro);
+            flex-shrink: 0;
+        }
+        .accordion-item.open .accordion-chevron {
+            transform: rotate(180deg);
+            color: var(--forsythia);
+        }
+
+        .accordion-body {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows var(--t-layout) var(--ease-layout);
+        }
+        .accordion-item.open .accordion-body { grid-template-rows: 1fr; }
+
+        .accordion-body-inner { overflow: hidden; }
+        .accordion-content {
+            padding: 0 0 20px 56px;
+            font-size: 0.95rem;
+            color: rgba(241, 246, 244, 0.6);
+            line-height: 1.7;
+        }
+
+        /* ==============================
+           FEATURE 1: PRICING
+        ============================== */
+        #pricing {
+            background: rgba(23, 43, 54, 0.6);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-controls {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: 4px;
+        }
+
+        .billing-btn {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: rgba(241, 246, 244, 0.5);
+            background: none;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: color var(--t-micro) var(--ease-micro), background var(--t-micro) var(--ease-micro);
+            white-space: nowrap;
+        }
+        .billing-btn.active {
+            color: var(--oceanic-noir);
+            background: var(--forsythia);
+        }
+
+        .save-badge {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--oceanic-noir);
+            background: var(--deep-saffron);
+            padding: 3px 10px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        .currency-select-wrap {
+            position: relative;
+        }
+        .currency-select {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--arctic-powder);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 40px 12px 18px;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            transition: border-color var(--t-micro) var(--ease-micro), background var(--t-micro) var(--ease-micro);
+        }
+        .currency-select:hover {
+            border-color: rgba(255, 200, 1, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .currency-select option { background: var(--oceanic-noir); }
+
+        .currency-select-wrap::after {
+            content: '';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 6px solid rgba(241, 246, 244, 0.5);
+            pointer-events: none;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            align-items: start;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 36px 32px;
+            position: relative;
+            transition: transform var(--t-micro) var(--ease-micro), box-shadow var(--t-micro) var(--ease-micro),
+                border-color var(--t-micro) var(--ease-micro);
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(160deg, rgba(255, 200, 1, 0.08), rgba(255, 153, 50, 0.04));
+            border-color: rgba(255, 200, 1, 0.35);
+            transform: scale(1.03);
+        }
+        .pricing-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+
+        .featured-badge {
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--oceanic-noir);
+            background: linear-gradient(90deg, var(--forsythia), var(--deep-saffron));
+            padding: 6px 20px;
+            border-radius: 0 0 12px 12px;
+            white-space: nowrap;
+        }
+
+        .plan-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(241, 246, 244, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .plan-price-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .plan-currency {
+            font-family: var(--font-mono);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--forsythia);
+        }
+
+        .plan-amount {
+            font-family: var(--font-mono);
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--arctic-powder);
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .plan-period {
+            font-size: 0.9rem;
+            color: rgba(241, 246, 244, 0.4);
+            margin-left: 2px;
+        }
+
+        .plan-billed {
+            font-size: 0.85rem;
+            color: rgba(241, 246, 244, 0.35);
+            min-height: 18px;
+            margin-bottom: 24px;
+            font-family: var(--font-mono);
+        }
+
+        .plan-desc {
+            font-size: 0.95rem;
+            color: rgba(241, 246, 244, 0.55);
+            line-height: 1.6;
+            margin-bottom: 28px;
+            min-height: 60px;
+        }
+
+        .plan-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.07);
+            margin-bottom: 24px;
+        }
+
+        .plan-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .plan-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: rgba(241, 246, 244, 0.7);
+            line-height: 1.5;
+        }
+        .plan-feature svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            color: var(--forsythia);
+        }
+        .plan-feature.muted { color: rgba(241, 246, 244, 0.3); }
+        .plan-feature.muted svg { color: rgba(241, 246, 244, 0.2); }
+
+        .plan-btn {
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 16px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform var(--t-micro) var(--ease-micro), box-shadow var(--t-micro) var(--ease-micro);
+        }
+        .plan-btn.primary {
+            color: var(--oceanic-noir);
+            background: linear-gradient(135deg, var(--forsythia), var(--deep-saffron));
+        }
+        .plan-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 200, 1, 0.35);
+        }
+        .plan-btn.ghost {
+            color: var(--arctic-powder);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .plan-btn.ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ==============================
+           SOCIAL PROOF
+        ============================== */
+        #social-proof {
+            background: rgba(23, 43, 54, 0.5);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .logos-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            margin-bottom: 72px;
+            opacity: 0.4;
+            filter: grayscale(1);
+        }
+        .logo-item {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--arctic-powder);
+            letter-spacing: -0.02em;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: left;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 32px;
+            transition: border-color var(--t-micro) var(--ease-micro), transform var(--t-micro) var(--ease-micro);
+        }
+        .testimonial-card:hover {
+            border-color: rgba(255, 200, 1, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 16px;
+        }
+        .star { color: var(--forsythia); font-size: 1rem; }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: rgba(241, 246, 244, 0.7);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--forsythia), var(--deep-saffron));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--oceanic-noir);
+            flex-shrink: 0;
+        }
+        .author-name {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--arctic-powder);
+        }
+        .author-role {
+            font-size: 0.8rem;
+            color: rgba(241, 246, 244, 0.4);
+        }
+
+        /* ==============================
+           CTA SECTION
+        ============================== */
+        #cta-section {
+            background: rgba(23, 43, 54, 0.4);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+        .cta-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(255, 200, 1, 0.06), rgba(255, 153, 50, 0.03));
+            border: 1px solid rgba(255, 200, 1, 0.15);
+            border-radius: 24px;
+            padding: 80px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-inner::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 200, 1, 0.06), transparent 70%);
+            pointer-events: none;
+        }
+        .cta-heading {
+            font-family: var(--font-mono);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: var(--arctic-powder);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .cta-sub {
+            font-size: 1.05rem;
+            color: rgba(241, 246, 244, 0.6);
+            margin-bottom: 36px;
+            line-height: 1.65;
+            position: relative;
+        }
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        /* ==============================
+           FOOTER - LARGER AND BETTER
+        ============================== */
+        footer {
+            padding: 64px max(24px, calc((100vw - 1200px) / 2));
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+            background: rgba(23, 43, 54, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .footer-brand {
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--forsythia);
+            letter-spacing: -0.04em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(241, 246, 244, 0.5);
+            text-decoration: none;
+            transition: color var(--t-micro) var(--ease-micro);
+        }
+        .footer-links a:hover { color: var(--arctic-powder); }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(241, 246, 244, 0.4);
+            text-decoration: none;
+            transition: border-color var(--t-micro) var(--ease-micro), color var(--t-micro) var(--ease-micro);
+            font-size: 0.9rem;
+        }
+        .footer-social a:hover {
+            border-color: var(--forsythia);
+            color: var(--forsythia);
+        }
+
+        .footer-copy {
+            font-size: 0.9rem;
+            color: rgba(241, 246, 244, 0.3);
+            font-family: var(--font-mono);
+            width: 100%;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 16px;
+        }
+
+        /* ==============================
+           RESPONSIVE BREAKPOINTS
+        ============================== */
+        @media (max-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+            .pricing-card.featured { transform: none; }
+            .pricing-card.featured:hover { transform: translateY(-4px); }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .bento-grid { display: none !important; }
+            .accordion { display: block !important; }
+            nav a:not(.nav-cta) { display: none; }
+            .cursor-dot,
+            .cursor-ring { display: none; }
+            html,
+            body { cursor: auto; }
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 48px 24px;
+            }
+            .footer-links {
+                justify-content: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header { padding: 0 16px; height: 64px; }
+            section { padding: 64px 20px; }
+            .hero { padding: 100px 20px 60px; }
+            .hero-metrics { gap: 24px; }
+            .metric::after { display: none; }
+            .pricing-controls { gap: 16px; }
+            .cta-inner { padding: 40px 24px; }
+            footer { padding: 32px 20px; }
+            .footer-links { gap: 16px; }
+            .footer-links a { font-size: 0.9rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition-duration: 0.01ms !important;
+            }
+            .cursor-dot,
+            .cursor-ring { display: none; }
+            html,
+            body { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== CUSTOM CURSOR ========== -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ========== ANIMATED BACKGROUND LAYERS ========== -->
+    <div class="bg-layer-1" aria-hidden="true"></div>
+
+    <!-- STARFIELD - BRIGHT VISIBLE STARS -->
+    <div class="starfield" aria-hidden="true">
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div><div class="star"></div><div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <div class="bg-layer-2" aria-hidden="true"></div>
+    <div class="bg-layer-3" aria-hidden="true"></div>
+
+    <!-- LIGHT RAYS - BRIGHT MOVING LIGHTS -->
+    <div class="light-rays" aria-hidden="true">
+        <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+        <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+        <div class="ray"></div><div class="ray"></div>
+    </div>
+
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <div class="particles" aria-hidden="true">
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- ========== LOADER ========== -->
+    <div id="loader" role="status" aria-label="Loading NexAI">
+        <span class="loader-wordmark">NexAI</span>
+        <div class="loader-bar-track">
+            <div class="loader-bar-fill"></div>
+        </div>
+    </div>
+
+    <!-- ========== PAGE WRAPPER ========== -->
+    <div class="page-wrap" id="pageWrap">
+
+        <!-- ========== HEADER ========== -->
+        <header role="banner">
+            <a href="#" class="nav-logo" aria-label="NexAI Home">
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect x="2" y="2" width="10" height="10" rx="3" fill="#FFC801"/>
+                    <rect x="16" y="2" width="10" height="10" rx="3" fill="#FF9932" opacity="0.7"/>
+                    <rect x="2" y="16" width="10" height="10" rx="3" fill="#FF9932" opacity="0.7"/>
+                    <rect x="16" y="16" width="10" height="10" rx="3" fill="#FFC801"/>
+                </svg>
+                NexAI
+            </a>
+
+            <nav aria-label="Primary navigation">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#social-proof">Testimonials</a>
+                <a href="#cta-section" class="nav-cta">Start Free →</a>
+            </nav>
+        </header>
+
+        <!-- ========== HERO ========== -->
+        <main id="main-content">
+            <section class="hero" id="hero" aria-labelledby="hero-heading">
+
+                <div class="hero-eyebrow" aria-label="Now in public beta">
+                    <span aria-hidden="true"></span>
+                    Now in public beta — v2.4.1
+                </div>
+
+                <h1 class="hero-headline" id="hero-heading">
+                    Intelligence,<br>
+                    <span class="gradient-text">Automated.</span>
+                </h1>
+
+                <p class="hero-subhead">
+                    NexAI transforms your messy data pipelines into precision-engineered automation workflows. Connect, analyze, and act — at machine speed.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#pricing" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                            <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Get Started Free
+                    </a>
+                    <a href="#features" class="btn-ghost">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M6.5 5.5l4 2.5-4 2.5V5.5z" fill="currentColor"/>
+                        </svg>
+                        See it in action
+                    </a>
+                </div>
+
+                <div class="hero-metrics" role="list" aria-label="Platform statistics">
+                    <div class="metric" role="listitem">
+                        <span class="metric-value">98.9%</span>
+                        <span class="metric-label">Uptime SLA</span>
+                    </div>
+                    <div class="metric" role="listitem">
+                        <span class="metric-value">2.4M+</span>
+                        <span class="metric-label">Pipelines Run</span>
+                    </div>
+                    <div class="metric" role="listitem">
+                        <span class="metric-value">147ms</span>
+                        <span class="metric-label">Avg Latency</span>
+                    </div>
+                    <div class="metric" role="listitem">
+                        <span class="metric-value">12K+</span>
+                        <span class="metric-label">Teams Trust Us</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== FEATURES: BENTO → ACCORDION ========== -->
+            <section id="features" aria-labelledby="features-heading">
+                <div class="section-header reveal">
+                    <p class="section-eyebrow">Platform Capabilities</p>
+                    <h2 class="section-heading" id="features-heading">Built for the<br>intelligence era.</h2>
+                    <p class="section-sub">Every feature is engineered to eliminate latency between your data and your decisions.</p>
+                </div>
+
+                <!-- DESKTOP: Bento Grid -->
+                <div class="bento-grid reveal" id="bentoGrid" aria-label="Feature showcase">
+                    <article class="bento-card" data-index="0" tabindex="0" aria-expanded="false">
+                        <div class="bento-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                            </svg>
+                        </div>
+                        <h3 class="bento-title">Neural Pipeline Engine</h3>
+                        <p class="bento-desc">Self-optimizing data pipelines that learn your ingestion patterns and pre-cache transformations.</p>
+                        <div class="bento-detail">Reduce cold-start latency by up to 340% with predictive pre-warming. Analyzes 90-day rolling windows to pre-stage operations.</div>
+                        <span class="bento-tag">Core Infra</span>
+                    </article>
+
+                    <article class="bento-card" data-index="1" tabindex="0" aria-expanded="false">
+                        <div class="bento-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3"/>
+                            </svg>
+                        </div>
+                        <h3 class="bento-title">Semantic Schema Inference</h3>
+                        <p class="bento-desc">Drop any data source and watch NexAI map relationships, detect anomalies, and propose normalization.</p>
+                        <div class="bento-detail">Supports 140+ source types. Schema drift detected in real-time and surfaced as actionable alerts.</div>
+                        <span class="bento-tag">Intelligence</span>
+                    </article>
+
+                    <article class="bento-card" data-index="2" tabindex="0" aria-expanded="false">
+                        <div class="bento-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                            </svg>
+                        </div>
+                        <h3 class="bento-title">Zero-Downtime Orchestration</h3>
+                        <p class="bento-desc">Blue-green deployment for data workflows. Roll forward or back without interrupting consumers.</p>
+                        <div class="bento-detail">Every pipeline version immutably stored. Rollback completes in under 800ms with full lineage preserved.</div>
+                        <span class="bento-tag">Reliability</span>
+                    </article>
+
+                    <article class="bento-card" data-index="3" tabindex="0" aria-expanded="false">
+                        <div class="bento-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3 class="bento-title">Governance & Lineage Graph</h3>
+                        <p class="bento-desc">End-to-end data lineage with column-level granularity. Every transformation is cryptographically logged.</p>
+                        <div class="bento-detail">GDPR and CCPA compliance built-in. Generate audit reports, trace PII propagation across your entire data estate.</div>
+                        <span class="bento-tag">Compliance</span>
+                    </article>
+
+                    <article class="bento-card" data-index="4" tabindex="0" aria-expanded="false">
+                        <div class="bento-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                        </div>
+                        <h3 class="bento-title">Real-Time Observability</h3>
+                        <p class="bento-desc">Sub-second metrics on every operator in your DAG. Catch bottlenecks before they cascade.</p>
+                        <div class="bento-detail">Prometheus-compatible metrics, OpenTelemetry traces, and auto-provisioned Grafana dashboards.</div>
+                        <span class="bento-tag">Monitoring</span>
+                    </article>
+                </div>
+
+                <!-- MOBILE: Accordion -->
+                <div class="accordion" id="accordionList" role="list" aria-label="Feature showcase"></div>
+            </section>
+
+            <!-- ========== FEATURE 1: PRICING ========== -->
+            <section id="pricing" aria-labelledby="pricing-heading">
+                <div class="section-header reveal">
+                    <p class="section-eyebrow">Transparent Pricing</p>
+                    <h2 class="section-heading" id="pricing-heading">Scale without<br>sticker shock.</h2>
+                    <p class="section-sub">Every plan includes full platform access. Pay only for what you automate.</p>
+                </div>
+
+                <div class="pricing-controls reveal" role="group" aria-label="Pricing configuration">
+                    <div class="billing-toggle" role="group" aria-label="Billing cycle">
+                        <button class="billing-btn active" id="btn-monthly" aria-pressed="true">Monthly</button>
+                        <button class="billing-btn" id="btn-annual" aria-pressed="false">
+                            Annual
+                            <span class="save-badge">Save 20%</span>
+                        </button>
+                    </div>
+
+                    <div class="currency-select-wrap">
+                        <label for="currencySelect" class="sr-only">Select currency</label>
+                        <select class="currency-select" id="currencySelect" aria-label="Select currency">
+                            <option value="INR">₹ INR</option>
+                            <option value="USD" selected>$ USD</option>
+                            <option value="EUR">€ EUR</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pricing-grid reveal reveal-delay-1">
+                    <!-- Starter -->
+                    <article class="pricing-card" aria-labelledby="plan-starter">
+                        <p class="plan-name">Starter</p>
+                        <div class="plan-price-wrap">
+                            <span class="plan-currency" data-price-symbol="starter"></span>
+                            <span class="plan-amount" data-price-value="starter">0</span>
+                            <span class="plan-period">/mo</span>
+                        </div>
+                        <p class="plan-billed" data-price-billed="starter"></p>
+                        <p class="plan-desc">Perfect for indie developers and small projects exploring AI automation.</p>
+                        <div class="plan-divider" aria-hidden="true"></div>
+                        <ul class="plan-features" aria-label="Starter plan features">
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>5 active pipelines</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>10K records/day</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>Community support</li>
+                            <li class="plan-feature muted"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>No governance suite</li>
+                        </ul>
+                        <button class="plan-btn ghost" type="button">Get started free</button>
+                    </article>
+
+                    <!-- Pro -->
+                    <article class="pricing-card featured" aria-labelledby="plan-pro">
+                        <div class="featured-badge">Most Popular</div>
+                        <p class="plan-name">Pro</p>
+                        <div class="plan-price-wrap">
+                            <span class="plan-currency" data-price-symbol="pro"></span>
+                            <span class="plan-amount" data-price-value="pro">0</span>
+                            <span class="plan-period">/mo</span>
+                        </div>
+                        <p class="plan-billed" data-price-billed="pro"></p>
+                        <p class="plan-desc">For growing teams that need power, governance, and reliability.</p>
+                        <div class="plan-divider" aria-hidden="true"></div>
+                        <ul class="plan-features" aria-label="Pro plan features">
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>Unlimited pipelines</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>5M records/day</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>Priority support (4hr SLA)</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>99.9% uptime SLA</li>
+                        </ul>
+                        <button class="plan-btn primary" type="button">Start Pro trial →</button>
+                    </article>
+
+                    <!-- Enterprise -->
+                    <article class="pricing-card" aria-labelledby="plan-enterprise">
+                        <p class="plan-name">Enterprise</p>
+                        <div class="plan-price-wrap">
+                            <span class="plan-currency" data-price-symbol="enterprise"></span>
+                            <span class="plan-amount" data-price-value="enterprise">0</span>
+                            <span class="plan-period">/mo</span>
+                        </div>
+                        <p class="plan-billed" data-price-billed="enterprise"></p>
+                        <p class="plan-desc">For data-intensive organizations requiring custom SLAs and dedicated infrastructure.</p>
+                        <div class="plan-divider" aria-hidden="true"></div>
+                        <ul class="plan-features" aria-label="Enterprise plan features">
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>Unlimited everything</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>Dedicated compute cluster</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>24/7 dedicated CSM</li>
+                            <li class="plan-feature"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8l4 4 8-8"/></svg>99.99% uptime SLA</li>
+                        </ul>
+                        <button class="plan-btn ghost" type="button">Talk to sales</button>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ========== SOCIAL PROOF ========== -->
+            <section id="social-proof" aria-labelledby="social-proof-heading">
+                <div class="section-header reveal">
+                    <p class="section-eyebrow">Trusted by Engineering Teams</p>
+                    <h2 class="section-heading" id="social-proof-heading">Teams ship faster<br>with NexAI.</h2>
+                </div>
+
+                <div class="logos-row reveal" aria-label="Companies using NexAI">
+                    <span class="logo-item">Meridian</span>
+                    <span class="logo-item">DataForge</span>
+                    <span class="logo-item">Axiom Labs</span>
+                    <span class="logo-item">Stratum AI</span>
+                    <span class="logo-item">Vortex Co.</span>
+                    <span class="logo-item">NovaTech</span>
+                </div>
+
+                <div class="testimonials-grid">
+                    <article class="testimonial-card reveal" aria-label="Testimonial from Priya Menon">
+                        <div class="testimonial-stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="testimonial-text">"We replaced three separate tools with NexAI and cut our data engineering headcount by 40%. The pipeline engine is genuinely magical."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">PM</div>
+                            <div>
+                                <p class="author-name">Priya Menon</p>
+                                <p class="author-role">Head of Data, Meridian</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card reveal reveal-delay-1" aria-label="Testimonial from Jordan Kessler">
+                        <div class="testimonial-stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="testimonial-text">"The Bento dashboard UI alone sold us. Schema drift alerts caught a GDPR risk in staging before it hit production."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JK</div>
+                            <div>
+                                <p class="author-name">Jordan Kessler</p>
+                                <p class="author-role">CTO, DataForge Inc.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="testimonial-card reveal reveal-delay-2" aria-label="Testimonial from Aisha Nwosu">
+                        <div class="testimonial-stars">
+                            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                        </div>
+                        <p class="testimonial-text">"Time to Interactive dropped from 4.2s to under 400ms after migrating to NexAI. The pricing model actually makes sense at our scale."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AN</div>
+                            <div>
+                                <p class="author-name">Aisha Nwosu</p>
+                                <p class="author-role">Staff Engineer, Axiom Labs</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ========== CTA ========== -->
+            <section id="cta-section" aria-labelledby="cta-heading">
+                <div class="cta-inner reveal">
+                    <h2 class="cta-heading" id="cta-heading">
+                        Your pipelines are<br>
+                        waiting to be<br>
+                        <span style="background: linear-gradient(135deg, #FFC801, #FF9932); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">intelligent.</span>
+                    </h2>
+                    <p class="cta-sub">Join 12,000+ engineering teams automating their data stack.<br>No credit card required to start.</p>
+                    <div class="cta-actions">
+                        <a href="#" class="btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                                <path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            Start building free
+                        </a>
+                        <a href="#" class="btn-ghost">Schedule a demo</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ========== FOOTER - LARGER ========== -->
+        <footer role="contentinfo">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;width:100%;justify-content:space-between;">
+                <span class="footer-brand">
+                    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <rect x="2" y="2" width="10" height="10" rx="3" fill="#FFC801"/>
+                        <rect x="16" y="2" width="10" height="10" rx="3" fill="#FF9932" opacity="0.7"/>
+                        <rect x="2" y="16" width="10" height="10" rx="3" fill="#FF9932" opacity="0.7"/>
+                        <rect x="16" y="16" width="10" height="10" rx="3" fill="#FFC801"/>
+                    </svg>
+                    NexAI
+                </span>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Docs</a>
+                    <a href="#">Status</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                </nav>
+                <div class="footer-social">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="LinkedIn">🔗</a>
+                    <a href="#" aria-label="YouTube">▶️</a>
+                </div>
+            </div>
+            <div class="footer-copy">© 2026 NexAI Platform, Inc. — Built with ❤️ for the Next-Gen AI Platform Speed Run</div>
+        </footer>
+
+    </div><!-- /page-wrap -->
+
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+
+    <script>
+        (function() {
+            'use strict';
+
+            /* ============================================================
+               CUSTOM CURSOR
+            ============================================================ */
+            const cursorDot = document.getElementById('cursorDot');
+            const cursorRing = document.getElementById('cursorRing');
+
+            let mouseX = 0,
+                mouseY = 0;
+            let ringX = 0,
+                ringY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+            });
+
+            function animateRing() {
+                ringX += (mouseX - ringX) * 0.12;
+                ringY += (mouseY - ringY) * 0.12;
+                cursorRing.style.left = ringX + 'px';
+                cursorRing.style.top = ringY + 'px';
+                requestAnimationFrame(animateRing);
+            }
+            animateRing();
+
+            const interactiveElements = document.querySelectorAll(
+                'a, button, .bento-card, .pricing-card, .testimonial-card, .accordion-trigger'
+            );
+
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorRing.classList.add('hover'); });
+                el.addEventListener('mouseleave', () => { cursorRing.classList.remove('hover'); });
+                el.addEventListener('mousedown', () => { cursorRing.classList.add('click'); });
+                el.addEventListener('mouseup', () => { cursorRing.classList.remove('click'); });
+            });
+
+            if (window.innerWidth <= 900) {
+                cursorDot.style.display = 'none';
+                cursorRing.style.display = 'none';
+            }
+
+            /* ============================================================
+               LOADER
+            ============================================================ */
+            const loader = document.getElementById('loader');
+            const pageWrap = document.getElementById('pageWrap');
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                    pageWrap.classList.add('visible');
+                }, 460);
+            }, { once: true });
+
+            /* ============================================================
+               SCROLL REVEAL
+            ============================================================ */
+            const revealEls = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('in-view');
+                        revealObserver.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            revealEls.forEach(el => revealObserver.observe(el));
+
+            /* ============================================================
+               FEATURE 2: BENTO ↔ ACCORDION
+            ============================================================ */
+            const FEATURES = [{
+                title: 'Neural Pipeline Engine',
+                desc: 'Self-optimizing data pipelines that learn your ingestion patterns.',
+                detail: 'Reduce cold-start latency by up to 340% with predictive pre-warming.',
+                tag: 'Core Infra',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`
+            }, {
+                title: 'Semantic Schema Inference',
+                desc: 'Drop any data source and watch NexAI map relationships.',
+                detail: 'Supports 140+ source types. Schema drift detected in real-time.',
+                tag: 'Intelligence',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3"/></svg>`
+            }, {
+                title: 'Zero-Downtime Orchestration',
+                desc: 'Blue-green deployment for data workflows without interruption.',
+                detail: 'Rollback completes in under 800ms with full lineage preserved.',
+                tag: 'Reliability',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`
+            }, {
+                title: 'Governance & Lineage Graph',
+                desc: 'Column-level data lineage with cryptographic logging.',
+                detail: 'GDPR and CCPA compliance built-in. One-click audit reports.',
+                tag: 'Compliance',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+            }, {
+                title: 'Real-Time Observability',
+                desc: 'Sub-second metrics on every operator in your DAG.',
+                detail: 'Prometheus-compatible, OpenTelemetry traces, auto-provisioned dashboards.',
+                tag: 'Monitoring',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="#FFC801" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`
+            }];
+
+            let activeIndex = -1;
+
+            const accordionList = document.getElementById('accordionList');
+            FEATURES.forEach((f, i) => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item';
+                item.setAttribute('role', 'listitem');
+                item.setAttribute('data-index', i);
+                item.innerHTML = `
+                        <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-body-${i}" id="acc-trigger-${i}" type="button">
+                            <span class="accordion-icon-wrap">${f.icon}</span>
+                            <span class="accordion-title">${f.title}</span>
+                            <svg class="accordion-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 8l5 5 5-5"/>
+                            </svg>
+                        </button>
+                        <div class="accordion-body" id="acc-body-${i}" role="region" aria-labelledby="acc-trigger-${i}">
+                            <div class="accordion-body-inner">
+                                <div class="accordion-content">
+                                    <p>${f.desc}</p>
+                                    <p style="margin-top:10px;color:rgba(241,246,244,0.5);font-size:0.85rem;">${f.detail}</p>
+                                    <span style="display:inline-block;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FFC801;background:rgba(255,200,1,0.08);border:1px solid rgba(255,200,1,0.15);padding:4px 12px;border-radius:100px;">${f.tag}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                accordionList.appendChild(item);
+            });
+
+            const bentoCards = document.querySelectorAll('.bento-card');
+
+            function activateBento(index) {
+                bentoCards.forEach((card, i) => {
+                    const isActive = i === index;
+                    card.classList.toggle('active', isActive);
+                    card.setAttribute('aria-expanded', String(isActive));
+                });
+                activeIndex = index;
+            }
+
+            function activateAccordion(index) {
+                const items = accordionList.querySelectorAll('.accordion-item');
+                items.forEach((item, i) => {
+                    const isOpen = i === index;
+                    item.classList.toggle('open', isOpen);
+                    const trigger = item.querySelector('.accordion-trigger');
+                    trigger.setAttribute('aria-expanded', String(isOpen));
+                });
+                activeIndex = index;
+            }
+
+            bentoCards.forEach((card, i) => {
+                card.addEventListener('click', () => {
+                    const next = activeIndex === i ? -1 : i;
+                    activateBento(next === -1 ? -1 : i);
+                    activeIndex = next;
+                });
+                card.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();
+                        card.click(); }
+                });
+            });
+
+            accordionList.addEventListener('click', e => {
+                const trigger = e.target.closest('.accordion-trigger');
+                if (!trigger) return;
+                const item = trigger.closest('.accordion-item');
+                const i = parseInt(item.getAttribute('data-index'));
+                const next = activeIndex === i ? -1 : i;
+                activateAccordion(next === -1 ? -1 : i);
+                activeIndex = next;
+            });
+
+            const MOBILE_BREAKPOINT = 900;
+            let wasMobile = window.innerWidth < MOBILE_BREAKPOINT;
+
+            const resizeObserver = new ResizeObserver(() => {
+                const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+                if (isMobile === wasMobile) return;
+                wasMobile = isMobile;
+                if (isMobile) {
+                    if (activeIndex >= 0) requestAnimationFrame(() => activateAccordion(activeIndex));
+                } else {
+                    if (activeIndex >= 0) requestAnimationFrame(() => activateBento(activeIndex));
+                }
+            });
+            resizeObserver.observe(document.body);
+
+            /* ============================================================
+               FEATURE 1: PRICING ENGINE
+            ============================================================ */
+            const PRICING_MATRIX = {
+                starter: { INR: 0, USD: 0, EUR: 0 },
+                pro: { INR: 2499, USD: 29, EUR: 27 },
+                enterprise: { INR: 9999, USD: 119, EUR: 109 }
+            };
+            const TARIFF = { INR: 1.0, USD: 1.0, EUR: 1.02 };
+            const ANNUAL_DISCOUNT = 0.80;
+            const CURRENCY_SYMBOL = { INR: '₹', USD: '$', EUR: '€' };
+
+            let currentCycle = 'monthly';
+            let currentCurrency = 'USD';
+
+            function computePrice(plan, cycle, currency) {
+                const base = PRICING_MATRIX[plan][currency];
+                const tariff = TARIFF[currency];
+                const discount = cycle === 'annual' ? ANNUAL_DISCOUNT : 1.0;
+                return Math.round(base * tariff * discount);
+            }
+
+            function formatAmount(plan, cycle, currency) {
+                const amount = computePrice(plan, cycle, currency);
+                return amount === 0 ? '0' : amount.toLocaleString();
+            }
+
+            function getBilledText(plan, cycle, currency) {
+                if (PRICING_MATRIX[plan][currency] === 0) return 'Free forever';
+                if (cycle === 'annual') {
+                    const yearly = computePrice(plan, cycle, currency) * 12;
+                    return `${CURRENCY_SYMBOL[currency]}${yearly.toLocaleString()} billed annually`;
+                }
+                return 'Billed monthly';
+            }
+
+            function updatePricingNodes() {
+                ['starter', 'pro', 'enterprise'].forEach(plan => {
+                    const symbolEl = document.querySelector(`[data-price-symbol="${plan}"]`);
+                    if (symbolEl) symbolEl.textContent = CURRENCY_SYMBOL[currentCurrency];
+
+                    const amountEl = document.querySelector(`[data-price-value="${plan}"]`);
+                    if (amountEl) {
+                        amountEl.animate([{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1,
+                                transform: 'translateY(0)' }], { duration: 175,
+                                easing: 'cubic-bezier(0.25,0,0,1)', fill: 'forwards' });
+                        amountEl.textContent = formatAmount(plan, currentCycle, currentCurrency);
+                    }
+
+                    const billedEl = document.querySelector(`[data-price-billed="${plan}"]`);
+                    if (billedEl) billedEl.textContent = getBilledText(plan, currentCycle, currentCurrency);
+                });
+            }
+
+            document.getElementById('btn-monthly').addEventListener('click', () => {
+                if (currentCycle === 'monthly') return;
+                currentCycle = 'monthly';
+                document.getElementById('btn-monthly').classList.add('active');
+                document.getElementById('btn-monthly').setAttribute('aria-pressed', 'true');
+                document.getElementById('btn-annual').classList.remove('active');
+                document.getElementById('btn-annual').setAttribute('aria-pressed', 'false');
+                updatePricingNodes();
+            });
+
+            document.getElementById('btn-annual').addEventListener('click', () => {
+                if (currentCycle === 'annual') return;
+                currentCycle = 'annual';
+                document.getElementById('btn-annual').classList.add('active');
+                document.getElementById('btn-annual').setAttribute('aria-pressed', 'true');
+                document.getElementById('btn-monthly').classList.remove('active');
+                document.getElementById('btn-monthly').setAttribute('aria-pressed', 'false');
+                updatePricingNodes();
+            });
+
+            document.getElementById('currencySelect').addEventListener('change', (e) => {
+                currentCurrency = e.target.value;
+                updatePricingNodes();
+            });
+
+            updatePricingNodes();
+
+            /* Smooth scroll for anchor links */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
